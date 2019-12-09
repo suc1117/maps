@@ -38,10 +38,125 @@ Sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 가장 밑에 부분에 만들고 싶은 이름.sh을 추가해주면
 reboot할때마다 자동으로 실행이 된다.
 
-3.maps는 html5의 geolocation 기능을 사용한 것이고, maps2는 새로고침을 이용한 방법이다.
-maps는 일시적인 chromium 오류로 인해 현재는 안되고 있지만, 해결 될 것이다.
+3.maps2는 새로고침을 이용한 방법이다.
 실시간 위치 표시와 장애물 마커 표시 (새로고침 버전)
 위치는 아파치 서버 경로 /var/www/html/에 넣어야 한다.
 PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버 경로에 있어야 한다.
-받아온 파일 내용을 읽어와 html 스크립트 구문에서 변수로 받아와서 사용한다
+받아온 파일 내용을 읽어와 html 스크립트 구문에서 변수로 받아와서 사용한다.
+```
+<?php
+	$i=0;
+	$j=0;
+	$result = "";
+	$result2 = "";
+	$lines = array();
+	$lines2 = array();
+	$lines = @file("data.txt") or $result = "파일을 읽을 수 없습니다.";
+	$lines2 = @file("location.txt") or $result = "파일을 읽을 수 없습니다.";
+
+	if ($lines != null){
+		for($i = 0;$i < count($lines);$i++){
+			$result .= ($i + 1) . ": " . $lines[$i] . "<br>";
+		}
+	}
+
+	if ($lines2 != null){
+		for($j = 0;$j < count($lines2);$j++){
+			$result2 .= ($j + 1) . ": " . $lines2[$j] . "<br>";
+		}
+	}
+	$abc = count($lines);
+?>
+```
+```var lat1 = <?= json_encode($lines) ?>;```
+
+```var lat2 = <?= json_encode($lines2) ?>;```
+
+
+	   function ddd(){
+			location.reload();
+		}
+			setInterval(ddd,5000);
+
+		var initialize = function() {
+		 map  = new google.maps.Map(document.getElementById('map-canvas'), 
+		 {center:new google.maps.LatLng(lat2[0], lat2[1]), zoom:15});
+		features2[0]={position : new google.maps.LatLng(lat2[0], lat2[1]),
+			type: 'info'
+		}
+		 mark = new google.maps.Marker({
+			position:features2[0].position,
+			 map:map
+			 });
+
+		for(b=0;b<marker_cou;b=b+2){
+			features[b/2] = {position : new google.maps.LatLng(lat1[b], lat1[b+1]),
+			type: 'info'
+		}
+
+    장애물마커표시
+		 while(i<marker_cou){
+			mark2 = new google.maps.Marker({
+			position: features[i/2].position,
+			map:map,
+			icon: {
+			url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+		        }
+                   });
+		   i=i+2;
+	  }
+
+maps1.php(html5의 geolocation을 활용)
+현재 chromium의 일시적인 오류로 인해 안되지만 컴퓨터 크롬을 통해 확인 결과 문제가 없었다.
+maps.php와 비슷하나 위와 같은 부분이 추가 되었다.
+var geo_options = {
+		enableHighAccuracy: true, 
+		maximumAge        : 30000, 
+		timeout           : 45000
+		};
+
+	   function geo_success(position) {
+		      console.log("위치받기 성공잼");
+		    window.lat = position.coords.latitude;
+		    window.lng = position.coords.longitude;
+		};
+		
+		setInterval(function() {
+			navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+		}, 10000);
+	   function geo_error(err) {
+		 //console.warn('Error-----('+err.code+'):'+err.message);
+		 console.log("실패");
+		};
+	   if(navigator.geolocation) {
+		   navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
+		}
+		else{
+			alert("안됌");
+		}
+   
+   
+   var redraw = function(payload) {
+	   console.log("리드로우 실행");
+     lat = payload.message.lat;
+     lng = payload.message.lng;
+     map.setCenter({lat:lat, lng:lng, alt:0});
+     mark.setPosition({lat:lat, lng:lng, alt:0});
+     //mark2.setPosition({lat:lat1[0], lng:lat1[1], alt:0});
+   };
+   
+   var pnChannel = "map2-channel";
+   var pubnub = new PubNub({
+     publishKey:   'pub-c-73cb03fb-7b31-4fc5-b6d6-956bfd2c6c0d',
+     subscribeKey: 'sub-c-162d3c8c-1273-11ea-bcdc-a6989f9d21fe'
+   });
+   
+   pubnub.subscribe({channels: [pnChannel]});
+   pubnub.addListener({message:redraw});
+   setInterval(function() {
+     pubnub.publish({channel:pnChannel, message:currentLocation()});
+      //console.log(window.lat);
+      //console.log(window.lng);
+     
+   }, 1500);
 

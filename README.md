@@ -37,9 +37,10 @@ maps2는 새로고침을 이용한 방법이다.
 실시간 위치 표시와 장애물 마커 표시 (새로고침 버전)
 위치는 아파치 서버 경로 /var/www/html/에 넣어야 한다.
 PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버 경로에 있어야 한다.
-받아온 파일 내용을 읽어와 html 스크립트 구문에서 변수로 받아와서 사용한다.
 
 마지막 부분에 구글 API 키를 넣는 부분이 있는데 그 부분에다가 https://github.com/suc1117/UnKnowN#4-google-map-api 위 페이지에 들어가서 참고하시고 구글 API를 받아서 넣으면 됩니다.
+
+PHP를 사용하여 서버 경로에 있는 txt파일을 읽어 변수로 받는 부분
 ```
 <?php
 	$i=0;
@@ -65,12 +66,17 @@ PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버
 	$abc = count($lines);
 ?>
 ```
+
+php에서 받아온 파일을 script 부분에서 사용 할 수 있게끔 변수로 지정
 ```var lat1 = <?= json_encode($lines) ?>;```
 
 ```var lat2 = <?= json_encode($lines2) ?>;```
 
 
-	   function ddd(){
+
+새로고침을 하고 구글맵 중앙값 맞추기와 현재 위치 마커 지정
+	   
+	   ```function ddd(){
 			location.reload();
 		}
 			setInterval(ddd,5000);
@@ -89,10 +95,13 @@ PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버
 		for(b=0;b<marker_cou;b=b+2){
 			features[b/2] = {position : new google.maps.LatLng(lat1[b], lat1[b+1]),
 			type: 'info'
-		}
+		}```
 
-    장애물마커표시
-		 while(i<marker_cou){
+
+장애물마커표시
+
+```
+    		 while(i<marker_cou){
 			mark2 = new google.maps.Marker({
 			position: features[i/2].position,
 			map:map,
@@ -102,7 +111,7 @@ PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버
                    });
 		   i=i+2;
 	  }
-
+```
 maps1.php(html5의 geolocation을 활용)
 현재 chromium의 일시적인 오류로 인해 안되지만 컴퓨터 크롬을 통해 확인 결과 문제가 없었다.
 maps.php와 비슷하나 위와 같은 부분이 추가 되었다.

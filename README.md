@@ -105,6 +105,7 @@ maps.php와 비슷하나 위와 같은 부분이 추가 되었다.
 
 
 
+
 var geo_options = {
 		enableHighAccuracy: true, 
 		maximumAge        : 30000, 

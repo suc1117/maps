@@ -41,8 +41,8 @@ PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버
 	$result2 = "";
 	$lines = array();
 	$lines2 = array();
-	$lines = @file("data.txt") or $result = "파일을 읽을 수 없습니다.";
-	$lines2 = @file("location.txt") or $result = "파일을 읽을 수 없습니다.";
+	$lines = @file("data.txt") or $result = "파일을 읽을 수 없습니다.";//장애물 위치
+	$lines2 = @file("location.txt") or $result = "파일을 읽을 수 없습니다.";//현재 
 
 	if ($lines != null){
 		for($i = 0;$i < count($lines);$i++){
@@ -146,14 +146,17 @@ var geo_options = {
    
 3.쉘 파일 자동 실행
 라즈베리파이를 부팅하고 자동으로 위에 만든 php파일을 실행하고 싶을 때 아래와 같은 방법을 사용합니다.
-```Nano 만들고 싶은 이름.sh```
+```sudo nano 만들고 싶은 이름.sh```
 
 맨 위에 /#! /bin/bash 입력 한 후
 터미널 명령어 입력
 
 권한부여
-Chmod 755 만들고 싶은 이름.sh
+sudo chmod 755 만들고 싶은 이름.sh
 
-Sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
-가장 밑에 부분에 만들고 싶은 이름.sh을 추가해주면
-reboot할때마다 자동으로 실행이 된다.
+1. 라즈베리 파이 부팅 후 terminal 실행
+2. sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
+3. 제일 아랫 줄에 실행 명령어 추가
+    이 때 앞에 나오는 명령어는 절대경로로 적어주시면 되겠습니다. 명령어의 위치를 모르시겠다면 터미널에서
+    which 명령어 를 입력하시면 해당 명령어의 경로가 출력됩니다.
+4. 저장 후 재부팅

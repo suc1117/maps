@@ -113,13 +113,14 @@ php에서 받아온 파일을 script 부분에서 사용 할 수 있게끔 변�
 		   i=i+2;
 	  }
 ```
-maps1.php(html5의 geolocation을 활용)
+maps.php(html5의 geolocation을 활용)
 현재 chromium의 일시적인 오류로 인해 안되지만 컴퓨터 크롬을 통해 확인 결과 문제가 없었다.
 maps.php와 비슷하나 위와 같은 부분이 추가 되었다.
 
 
+html5에 있는 geolocation의 watchpostion을 사용하여 위치가 바뀔때마다 자동으로 위도와 경도를 받아오는 방법
 
-
+```
 var geo_options = {
 		enableHighAccuracy: true, 
 		maximumAge        : 30000, 
@@ -145,7 +146,11 @@ var geo_options = {
 		else{
 			alert("안됌");
 		}
+   ```
    
+   redraw를 통해 위도, 경도가 바뀔 때 자연스럽게 맵의 중앙이 업데이트 된 위도 경도를 기준으로 자연스럽게 바뀐다.
+   
+   ```
    
    var redraw = function(payload) {
 	
@@ -161,6 +166,9 @@ var geo_options = {
      
      //mark2.setPosition({lat:lat1[0], lng:lat1[1], alt:0});
    };
+   
+   ```
+   
    
 ### 3. 쉘 파일 자동 실행
 라즈베리파이를 부팅하고 자동으로 위에 만든 php파일을 실행하고 싶을 때 아래와 같은 방법을 사용합니다.

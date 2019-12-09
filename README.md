@@ -26,21 +26,9 @@ php정보를 보고 싶으면 ```<?php phpinfo(); ?>```를 넣으면 아래와 �
 
 <img src="https://user-images.githubusercontent.com/48506474/70418585-0725cd80-1aa7-11ea-87e1-2be2069363c7.jpg" width=400px>
 
-2.쉘 파일 자동 실행
-라즈베리파이를 부팅하고 바로 실행하고 싶은 터미널 명령이 있을 때 사용
-```Nano 만들고 싶은 이름.sh```
 
-맨 위에 /#! /bin/bash 입력 한 후
-터미널 명령어 입력
 
-권한부여
-Chmod 755 만들고 싶은 이름.sh
-
-Sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
-가장 밑에 부분에 만들고 싶은 이름.sh을 추가해주면
-reboot할때마다 자동으로 실행이 된다.
-
-3.maps2는 새로고침을 이용한 방법이다.
+2.maps2는 새로고침을 이용한 방법이다.
 실시간 위치 표시와 장애물 마커 표시 (새로고침 버전)
 위치는 아파치 서버 경로 /var/www/html/에 넣어야 한다.
 PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버 경로에 있어야 한다.
@@ -156,4 +144,16 @@ var geo_options = {
      //mark2.setPosition({lat:lat1[0], lng:lat1[1], alt:0});
    };
    
+3.쉘 파일 자동 실행
+라즈베리파이를 부팅하고 자동으로 위에 만든 php파일을 실행하고 싶을 때 아래와 같은 방법을 사용합니다.
+```Nano 만들고 싶은 이름.sh```
 
+맨 위에 /#! /bin/bash 입력 한 후
+터미널 명령어 입력
+
+권한부여
+Chmod 755 만들고 싶은 이름.sh
+
+Sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
+가장 밑에 부분에 만들고 싶은 이름.sh을 추가해주면
+reboot할때마다 자동으로 실행이 된다.

@@ -77,7 +77,7 @@ php에서 받아온 파일을 script 부분에서 사용 할 수 있게끔 변�
 
 새로고침을 하고 구글맵 중앙값 맞추기와 현재 위치 마커 지정
 	   
-	  ``` function ddd(){
+	   function ddd(){
 			location.reload();
 		}
 			setInterval(ddd,5000);
@@ -96,7 +96,7 @@ php에서 받아온 파일을 script 부분에서 사용 할 수 있게끔 변�
 		for(b=0;b<marker_cou;b=b+2){
 			features[b/2] = {position : new google.maps.LatLng(lat1[b], lat1[b+1]),
 			type: 'info'
-		} ```
+		} 
 
 
 장애물마커표시

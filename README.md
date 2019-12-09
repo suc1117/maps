@@ -2,7 +2,7 @@
 
 라즈베리파이 
 
-1.APACHE + PHP
+### 1.APACHE2 + PHP
 APACHE 설치 방법 : 
 터미널창 실행 후에
 <pre>Sudo apt-get update</pre>
@@ -31,7 +31,9 @@ php정보를 보고 싶으면 ```<?php phpinfo(); ?>```를 넣으면 아래와 �
 
 
 
-2.maps2는 새로고침을 이용한 방법이다.
+### 2. APACHE2 + PHP를 활용한 실시간 위치 추적과 장애물 마커 표시
+
+maps2는 새로고침을 이용한 방법이다.
 실시간 위치 표시와 장애물 마커 표시 (새로고침 버전)
 위치는 아파치 서버 경로 /var/www/html/에 넣어야 한다.
 PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버 경로에 있어야 한다.
@@ -150,7 +152,7 @@ var geo_options = {
      //mark2.setPosition({lat:lat1[0], lng:lat1[1], alt:0});
    };
    
-3.쉘 파일 자동 실행
+### 3. 쉘 파일 자동 실행
 라즈베리파이를 부팅하고 자동으로 위에 만든 php파일을 실행하고 싶을 때 아래와 같은 방법을 사용합니다.
 ```sudo nano 만들고 싶은 이름.sh```
 

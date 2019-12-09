@@ -68,6 +68,7 @@ PHP를 사용하여 서버 경로에 있는 txt파일을 읽어 변수로 받는
 ```
 
 php에서 받아온 파일을 script 부분에서 사용 할 수 있게끔 변수로 지정
+
 ```var lat1 = <?= json_encode($lines) ?>;```
 
 ```var lat2 = <?= json_encode($lines2) ?>;```

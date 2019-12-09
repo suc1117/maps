@@ -16,15 +16,18 @@ APACHE 설치 방법 :
 PHP 설치 하는법 :
 <pre>Sudo apt-get install php libapache2-mod-php -y</pre>
 Sudo nano 만들고 싶은 파일이름.php
-Php 구문 작성 : ```<?php echo “hello world”; ?>```
+
+Php 구문 작성 : 
+```<?php echo “hello world”; ?>```
 Localhost/만들고 싶은 파일이름.php를 치면
 Hello world를 볼 수 있다.
-php정보를 보고 싶으면 <?php phpinfo(); ?>를 넣으면 됩니다.
+php정보를 보고 싶으면 ```<?php phpinfo(); ?>```를 넣으면 됩니다.
 
 
 2.쉘 파일 자동 실행
 라즈베리파이를 부팅하고 바로 실행하고 싶은 터미널 명령이 있을 때 사용
-Nano 만들고 싶은 이름.sh
+```Nano 만들고 싶은 이름.sh```
+
 맨 위에 /#! /bin/bash 입력 한 후
 터미널 명령어 입력
 

@@ -11,6 +11,8 @@ APACHE 설치 방법 :
 아파치 설치 완료
 테스트할때에는 브라우지 실행 후 localhost 또는 인터넷 ip주소를 입력하면
 <img src="https://user-images.githubusercontent.com/48506474/70411451-9f1abb80-1a95-11ea-9458-be031e5a0202.png" width=400px>
+
+
 위와 같은 창이 뜬다. 서버의 경로는 /var/www/html/로 기본 설정된다.
 그 안에 index.html이 있는데 index.html이 기본 페이지이다.
 

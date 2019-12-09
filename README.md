@@ -109,6 +109,9 @@ PHP문을 통해 파일을 읽어오는데 읽어 오는 파일도 apache 서버
 maps1.php(html5의 geolocation을 활용)
 현재 chromium의 일시적인 오류로 인해 안되지만 컴퓨터 크롬을 통해 확인 결과 문제가 없었다.
 maps.php와 비슷하나 위와 같은 부분이 추가 되었다.
+
+
+
 var geo_options = {
 		enableHighAccuracy: true, 
 		maximumAge        : 30000, 
@@ -137,26 +140,18 @@ var geo_options = {
    
    
    var redraw = function(payload) {
-	   console.log("리드로우 실행");
+	
+	console.log("리드로우 실행");
+     
      lat = payload.message.lat;
+     
      lng = payload.message.lng;
+     
      map.setCenter({lat:lat, lng:lng, alt:0});
+     
      mark.setPosition({lat:lat, lng:lng, alt:0});
+     
      //mark2.setPosition({lat:lat1[0], lng:lat1[1], alt:0});
    };
    
-   var pnChannel = "map2-channel";
-   var pubnub = new PubNub({
-     publishKey:   'pub-c-73cb03fb-7b31-4fc5-b6d6-956bfd2c6c0d',
-     subscribeKey: 'sub-c-162d3c8c-1273-11ea-bcdc-a6989f9d21fe'
-   });
-   
-   pubnub.subscribe({channels: [pnChannel]});
-   pubnub.addListener({message:redraw});
-   setInterval(function() {
-     pubnub.publish({channel:pnChannel, message:currentLocation()});
-      //console.log(window.lat);
-      //console.log(window.lng);
-     
-   }, 1500);
 
